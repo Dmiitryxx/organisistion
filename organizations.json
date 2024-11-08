@@ -1,9 +1,15 @@
 {
     "organizations": [
         {
-            "name": "LMT",
-            "adress": "FHH",
-            "id": "246",
+            "name": "Bite",
+            "adress": "Atbrivo\u0161anas aleja 168",
+            "id": "12363",
+            "contacts": []
+        },
+        {
+            "name": "Bite",
+            "adress": "Atbrovosana aleja 168",
+            "id": "1342",
             "contacts": []
         }
     ]

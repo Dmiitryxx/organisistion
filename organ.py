@@ -1,14 +1,16 @@
 import json
 
 organizations=[]
-file=open('organizations.json', 'r')
-data=json.load(file)
-file.close()
-organizations=data['organizations']
-print('DATI PIEVIENOTI')
-while (True):
-    response=input('(1) Add organization (2) Print organization (3) Exit')
-    if response=='1':
+def load_data():
+    file=open('organizations.json', 'r')
+    data=json.load(file)
+    file.close()
+    global organizations
+    organizations=data['organizations']
+    print('DATI PIEVIENOTI')
+
+
+def add_organization():
         organization_name=input('Organization name: ')
         organization_adress=input('Organization adress: ')
         organization_id=input('Organization id: ')
@@ -35,21 +37,45 @@ while (True):
             elif response=='nē':
                 break
         organizations.append(organization)
-    elif response=='2':
-        for organization in organizations:
+
+def print_organization():
+     for organization in organizations:
             print('---ORGANIZATION---')
             print(f"{organization['name']}({organization['id']})")
             print(f"Adrese:{organization['adress']}")
             print(f"Kontaktu skaits:{len(organization['contacts'])}")
-    elif response=='3':
-        data={
+
+def save_data():
+    data={
             'organizations': organizations
         }
-        print('SAGLĀBA DATUS.....')
-        file=open('organizations.json', 'w')
-        json.dump(data, file, indent=4)
-        print(organizations)
-        exit()
-    else:
-        print("Izvele skaitļu 1,2 vai 3")
-        continue
+    print('SAGLĀBA DATUS.....')
+    file=open('organizations.json', 'w')
+    json.dump(data, file, indent=4)
+    print('Data saved')
+
+def find_organization_by_id():
+     organizations_id=input('Ievadiet organizācija ID:')
+     for organization in organizations:
+          if organization['id']==organization_id:
+            print('---ORGANIZATION---')
+            print(f"{organization['name']}({organization['id']})")
+            break
+
+def main(): 
+    load_data()
+    while (True):
+        response=input('(1) Add organization (2) Print organization (3) Exit')
+        if response=='1':
+            add_organization()
+                
+        elif response=='2':
+            print_organization()
+        elif response=='3':
+            save_data()
+            print(organizations)
+            exit()
+        else:
+            print("Izvele skaitļu 1,2 vai 3")
+            continue
+main()
